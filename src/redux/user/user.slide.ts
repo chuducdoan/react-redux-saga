@@ -30,6 +30,13 @@ export const createUserPending = createAction<{ email: string; name: string }>(
 export const createUserSuccess = createAction("createUserSuccess");
 export const createUserFailed = createAction("createUserFailed");
 
+export const loginPending = createAction<{
+  email: string;
+  password: string;
+}>("loginPending");
+
+export const logout = createAction("logout");
+
 export const userSlice = createSlice({
   name: "user",
   initialState,

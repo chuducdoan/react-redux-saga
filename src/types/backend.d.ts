@@ -4,3 +4,8 @@ export interface IUser {
   email: string;
   // Add other user properties as needed
 }
+
+export interface ILogin {
+  email: string;
+  password: string;
+}

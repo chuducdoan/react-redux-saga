@@ -2,17 +2,35 @@ REDUX SAGA
 - next(): trả ra giá trị mà function generator đang kiểm soát
 - yield: nói vs generator biết đứng đây chờ ra lệnh, chỉ cần ra lệnh là sẽ thực hiện
 - put: để dispatch 1 action
-- takeEvery: mỗi khi dispatch action X thì nó sẽ chạy generate Y (takeEvery("X", Y))
+- takeEvery: mỗi khi dispatch action X thì nó sẽ chạy generate Y (takeEvery("X", Y))   =====  fork + take
 - takeLatest: tự động cancel những saga nào chưa chạy xong, chỉ lấy thằng cuối cùng thôi
 - call: để call api
 
-1. Non-Blocking 
+==> 1. Non-Blocking 
 Là các effect mà: 
 - Saga "yield' Effect mà không chờ kết quả của hành động, không quan tâm hành động  đấy có thành công/thất bại hay khi nào fininsh. 
 - Saga 'yield' non-blocking effect đấy, sau đấy thực hiện các Effect tiếp theo. 
 Ví dụ: 
 yield call(ApiFn, ...args) // Blocking: will wait for ApiFn (If ApiFn returns a Promise) yield put(...)  
 yield call(otherSaga, ...args) // Blocking: will wait for otherSaga to terminate 
-2. Blocking 
+
+==> 2. Blocking 
 Blocking là các Effect mà: 
 - Saga "yield" Effect này và đứng đó để chờ kết quả của hành động và không thực hiện  "các yield" tiếp theo
+VD: yield call, yield take
+
+
+==> 3.Task:
+- muốn nhiều task có thể thể chạy song song (để đảm bảo hiệu năng và thời gian)
+- sử dụng fork
+
+==> 4.Watcher/Worker
+- tạo ra nhiều task
+- thay vì dùng takeEvery ta dùng
+    while(true) {
+        yield take(....)
+    }
+
+==> 5. Các kiến thức 
+ - Khi nào nên sử dụng redux saga:
+    + sử dụng để xử lý các tiến trình song song phức tạp
