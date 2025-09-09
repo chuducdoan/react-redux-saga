@@ -10,14 +10,15 @@ REDUX SAGA
 Là các effect mà: 
 - Saga "yield' Effect mà không chờ kết quả của hành động, không quan tâm hành động  đấy có thành công/thất bại hay khi nào fininsh. 
 - Saga 'yield' non-blocking effect đấy, sau đấy thực hiện các Effect tiếp theo. 
-Ví dụ: 
-yield call(ApiFn, ...args) // Blocking: will wait for ApiFn (If ApiFn returns a Promise) yield put(...)  
-yield call(otherSaga, ...args) // Blocking: will wait for otherSaga to terminate 
+VD: yield put, yield takeEvery, yield fork
+
 
 ==> 2. Blocking 
 Blocking là các Effect mà: 
 - Saga "yield" Effect này và đứng đó để chờ kết quả của hành động và không thực hiện  "các yield" tiếp theo
 VD: yield call, yield take
+yield call(ApiFn, ...args) // Blocking: will wait for ApiFn (If ApiFn returns a Promise) 
+yield call(otherSaga, ...args) // Blocking: will wait for otherSaga to terminate 
 
 
 ==> 3.Task:
